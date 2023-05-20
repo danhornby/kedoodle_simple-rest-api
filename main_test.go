@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -32,14 +33,15 @@ func TestGetStatusRoute(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Contains(t, w.Header().Get("Content-Type"), "application/json")
 
-	expected := `{
+	expectedVersion, expectedDescription, expectedCommit := "dev", "my-application's description.", "unknown"
+	expected := fmt.Sprintf(`{
 		"my-application": [
 			{
-				"version": "1.0",
-				"description": "my-application's description.",
-				"sha": "abc53458585"
+				"version": "%s",
+				"description": "%s",
+				"sha": "%s"
 			}
 		]
-	}`
+	}`, expectedVersion, expectedDescription, expectedCommit)
 	assert.JSONEq(t, expected, w.Body.String())
 }
