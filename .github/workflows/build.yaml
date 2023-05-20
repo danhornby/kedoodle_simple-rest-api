@@ -1,7 +1,8 @@
-name: ci
+name: build
+
 on:
-  - push
-  - pull_request
+  push:
+  pull_request:
 
 jobs:
   lint:
@@ -27,7 +28,7 @@ jobs:
           go-version-file: go.mod
       - name: test
         run: go test -v ./...
-  build-image:
+  build:
     name: build image
     runs-on: ubuntu-latest
     steps:
