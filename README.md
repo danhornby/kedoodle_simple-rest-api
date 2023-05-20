@@ -31,13 +31,13 @@ The example `simple-rest-api` implements the following endpoints:
 - `GET /status`: Returns some application metadata provided at build-time
     ```json
     {
-    "my-application": [
-        {
-        "description": "my-application's description.",
-        "sha": "4c67e6a5b53f9f6481c437ac8af5b05e3bfa463e",
-        "version": "0.0"
-        }
-    ]
+        "my-application": [
+            {
+                "description": "my-application's description.",
+                "sha": "fd938c35a6e8073eb6eb5f39bf6b07ba1f1308f3",
+                "version": "1.0"
+            }
+        ]
     }
     ```
 
@@ -46,8 +46,7 @@ The `simple-rest-api` is a static application, packaged into a container image, 
 
 Example running the application locally from a pre-built image:  
 ```console
-$ docker run --rm -p 8080:8080 ghcr.io/kedoodle/simple-rest-api
-WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+$ docker run --platform linux/amd64 --rm -p 8080:8080 ghcr.io/kedoodle/simple-rest-api:1.0
 [GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
 
 [GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
@@ -60,6 +59,21 @@ WARNING: The requested image's platform (linux/amd64) does not match the detecte
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Environment variable PORT is undefined. Using port :8080 by default
 [GIN-debug] Listening and serving HTTP on :8080
+```
+```console
+$ curl -s localhost:8080/
+Hello World%
+
+$ curl -s localhost:8080/status | jq
+{
+  "my-application": [
+    {
+      "description": "my-application's description.",
+      "sha": "fd938c35a6e8073eb6eb5f39bf6b07ba1f1308f3",
+      "version": "1.0"
+    }
+  ]
+}
 ```
 
 ## Contributing
