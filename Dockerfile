@@ -1,6 +1,4 @@
 FROM golang:1.20 AS build
-ARG VERSION
-ARG DESCRIPTION
 ARG COMMIT
 
 WORKDIR /go/src/github.com/kedoodle/simple-rest-api
