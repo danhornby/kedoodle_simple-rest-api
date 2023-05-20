@@ -49,3 +49,19 @@ func TestGetStatusRoute(t *testing.T) {
 func TestMetadataEmbed(t *testing.T) {
 	assert.NotEmpty(t, metadataBytes)
 }
+
+func TestSetMetadata(t *testing.T) {
+	assert.Equal(t, "No version provided", Version)
+	assert.Equal(t, "No description provided", Description)
+
+	expectedVersion := "test version"
+	expectedDescription := "test description"
+	m := []byte(fmt.Sprintf(`{
+		"version": "%s",
+		"description": "%s"
+	}`, expectedVersion, expectedDescription))
+	setMetadata(m)
+
+	assert.Equal(t, expectedVersion, Version)
+	assert.Equal(t, expectedDescription, Description)
+}
