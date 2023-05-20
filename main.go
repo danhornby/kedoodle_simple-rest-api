@@ -12,7 +12,15 @@ func helloWorldHandler(c *gin.Context) {
 }
 
 func statusHandler(c *gin.Context) {
-	c.JSON(200, gin.H{"my-application": "json"})
+	c.JSON(200, gin.H{
+		"my-application": []gin.H{
+			{
+				"version":     "1.0",
+				"description": "my-application's description.",
+				"sha":         "abc53458585",
+			},
+		},
+	})
 }
 
 func main() {
