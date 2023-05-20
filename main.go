@@ -8,9 +8,9 @@ import (
 )
 
 var (
-	Version     = "dev"
-	Description = "my-application's description."
-	Commit      = "unknown"
+	Version     = "No version provided"
+	Description = "No description provided"
+	Commit      = "No commit provided"
 )
 
 //go:embed metadata.json

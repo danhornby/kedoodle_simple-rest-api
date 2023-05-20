@@ -33,7 +33,7 @@ func TestGetStatusRoute(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Contains(t, w.Header().Get("Content-Type"), "application/json")
 
-	expectedVersion, expectedDescription, expectedCommit := "dev", "my-application's description.", "unknown"
+	expectedVersion, expectedDescription, expectedCommit := "No version provided", "No description provided", "No commit provided"
 	expected := fmt.Sprintf(`{
 		"my-application": [
 			{
