@@ -32,4 +32,6 @@ func statusHandler(c *gin.Context) {
 func main() {
 	r := gin.Default()
 	setupRouter(r)
+
+	r.Run()
 }
