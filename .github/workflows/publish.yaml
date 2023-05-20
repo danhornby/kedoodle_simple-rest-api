@@ -10,6 +10,7 @@ jobs:
     name: publish
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: fetch values from metadata.json
         run: |
           echo "VERSION=$(jq -r '.version' metadata.json)" >> $GITHUB_ENV
@@ -19,7 +20,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/checkout@v3
       - uses: docker/setup-qemu-action@v2
       - uses: docker/setup-buildx-action@v2
       - name: build
