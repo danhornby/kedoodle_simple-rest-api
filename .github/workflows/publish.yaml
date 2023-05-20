@@ -10,6 +10,10 @@ jobs:
     name: publish
     runs-on: ubuntu-latest
     steps:
+      - name: fetch values from metadata.json
+        run: |
+          echo "VERSION=$(jq -r '.version' metadata.json)" >> $GITHUB_ENV
+          echo "DESCRIPTION=$(jq -r '.description' metadata.json)" >> $GITHUB_ENV
       - uses: docker/login-action@v2
         with:
           registry: ghcr.io
@@ -24,8 +28,8 @@ jobs:
           context: .
           push: true
           build-args: |
-            VERSION=${{ jq -r '.version' metadata.json }}
-            DESCRIPTION=${{ jq -r '.description' metadata.json }}
+            VERSION=${{ env.VERSION }}
+            DESCRIPTION=${{ env.DESCRIPTION }}
             COMMIT=${{ github.sha }}
           tags: |
             ghcr.io/${{ github.repository }}:${{ github.event.release.tag }}
