@@ -1,6 +1,10 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"log"
+
+	"github.com/gin-gonic/gin"
+)
 
 var (
 	Version     = "dev"
@@ -33,5 +37,8 @@ func main() {
 	r := gin.Default()
 	setupRouter(r)
 
-	r.Run()
+	err := r.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
