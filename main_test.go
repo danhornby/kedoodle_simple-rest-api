@@ -31,4 +31,6 @@ func TestGetStatusRoute(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Contains(t, w.Header().Get("Content-Type"), "application/json")
+
+	assert.Contains(t, w.Body.String(), "my-application")
 }
