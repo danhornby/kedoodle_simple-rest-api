@@ -12,7 +12,7 @@ func helloWorldHandler(c *gin.Context) {
 }
 
 func statusHandler(c *gin.Context) {
-	c.String(200, "OK")
+	c.JSON(200, gin.H{"some": "json"})
 }
 
 func main() {
