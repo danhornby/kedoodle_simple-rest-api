@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "embed"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -11,6 +12,9 @@ var (
 	Description = "my-application's description."
 	Commit      = "unknown"
 )
+
+//go:embed metadata.json
+var metadataBytes []byte
 
 func setupRouter(r *gin.Engine) {
 	r.GET("/", helloWorldHandler)

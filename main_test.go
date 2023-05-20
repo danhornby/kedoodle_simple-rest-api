@@ -45,3 +45,7 @@ func TestGetStatusRoute(t *testing.T) {
 	}`, expectedVersion, expectedDescription, expectedCommit)
 	assert.JSONEq(t, expected, w.Body.String())
 }
+
+func TestMetadataEmbed(t *testing.T) {
+	assert.NotEmpty(t, metadataBytes)
+}
