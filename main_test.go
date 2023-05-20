@@ -20,3 +20,14 @@ func TestGetRootRoute(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Equal(t, "Hello World", w.Body.String())
 }
+
+func TestGetStatusRoute(t *testing.T) {
+	w := httptest.NewRecorder()
+	_, r := gin.CreateTestContext(w)
+	setupRouter(r)
+
+	req, _ := http.NewRequest(http.MethodGet, "/status", nil)
+	r.ServeHTTP(w, req)
+
+	assert.Equal(t, http.StatusOK, w.Code)
+}
